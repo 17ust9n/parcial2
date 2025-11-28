@@ -2,16 +2,16 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main"
+    android:id="@+id/acerca_scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
+    android:background="@color/rojo"
     android:padding="16dp"
-    android:background="@color/rojo">
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
         android:paddingTop="16dp"
@@ -30,35 +30,22 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <Button
-                    android:id="@+id/btnMedicos"
+                <!-- Texto descriptivo de la empresa -->
+                <TextView
+                    android:id="@+id/tvDescripcion"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="Médicos"
-                    android:backgroundTint="@android:color/holo_red_dark"
-                    android:layout_marginBottom="8dp"/>
+                    android:layout_height="wrap_content"
+                    android:text="Nuestra empresa se dedica a ofrecer servicios médicos de calidad y confiables para todos nuestros pacientes. Nuestro compromiso es brindar atención profesional y cercana."
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="16dp"/>
 
+                <!-- Botón volver a MainActivity -->
                 <Button
-                    android:id="@+id/btnPacientes"
+                    android:id="@+id/btnVolver"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:text="Pacientes"
-                    android:backgroundTint="@android:color/holo_blue_light"
-                    android:layout_marginBottom="8dp"/>
-
-                <Button
-                    android:id="@+id/btnAcerca"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="Acerca"
-                    android:backgroundTint="@android:color/holo_green_light"
-                    android:layout_marginBottom="8dp"/>
-
-                <Button
-                    android:id="@+id/btnLogout"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="Cerrar sesión"
+                    android:text="Volver"
                     android:backgroundTint="@android:color/darker_gray"/>
 
             </LinearLayout>

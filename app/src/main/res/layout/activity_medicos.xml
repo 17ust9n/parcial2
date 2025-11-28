@@ -2,7 +2,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main"
+    android:id="@+id/medicos_scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
@@ -11,12 +11,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
         android:paddingTop="16dp"
         android:paddingBottom="16dp">
 
+        <!-- Card con descripción y botón volver -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,41 +31,32 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <Button
-                    android:id="@+id/btnMedicos"
+                <TextView
+                    android:id="@+id/tvDescripcionMedicos"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="Médicos"
-                    android:backgroundTint="@android:color/holo_red_dark"
-                    android:layout_marginBottom="8dp"/>
+                    android:layout_height="wrap_content"
+                    android:text="Aquí puedes consultar información exclusiva para médicos, administrar tus pacientes y gestionar diagnósticos."
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="16dp"/>
 
                 <Button
-                    android:id="@+id/btnPacientes"
+                    android:id="@+id/btnVolverMedicos"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:text="Pacientes"
-                    android:backgroundTint="@android:color/holo_blue_light"
-                    android:layout_marginBottom="8dp"/>
-
-                <Button
-                    android:id="@+id/btnAcerca"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="Acerca"
-                    android:backgroundTint="@android:color/holo_green_light"
-                    android:layout_marginBottom="8dp"/>
-
-                <Button
-                    android:id="@+id/btnLogout"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="Cerrar sesión"
+                    android:text="Volver"
                     android:backgroundTint="@android:color/darker_gray"/>
-
             </LinearLayout>
-
         </androidx.cardview.widget.CardView>
 
+        <!-- RecyclerView para lista de médicos -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMedicos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            android:scrollbars="vertical"
+            android:layout_marginTop="16dp"/>
     </LinearLayout>
 
 </ScrollView>

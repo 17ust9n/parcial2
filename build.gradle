@@ -1,7 +1,6 @@
+// No declaramos repositories aquí
 plugins {
     id 'com.android.application' version '8.5.0' apply false
     id 'com.android.library' version '8.5.0' apply false
-
-    // Google Services plugin (NO SE APLICA AQUÍ)
     id 'com.google.gms.google-services' version '4.4.4' apply false
 }

@@ -1,44 +1,46 @@
 package com.example.parcial2.ui.medico;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.parcial2.R;
 import com.example.parcial2.adapters.MedicosAdapter;
 import com.example.parcial2.data.local.AppDatabase;
-import com.example.parcial2.model.Medico;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListaMedicosActivity extends AppCompatActivity {
 
     private RecyclerView rvMedicos;
+    private Button btnVolver;
     private MedicosAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_medicos);
+        // Usamos el layout con descripción, botón y RecyclerView
+        setContentView(R.layout.activity_medicos);
 
-        // Inicializar RecyclerView
+        // Vincular vistas
         rvMedicos = findViewById(R.id.rvMedicos);
-        rvMedicos.setLayoutManager(new LinearLayoutManager(this));
+        btnVolver = findViewById(R.id.btnVolverMedicos);
 
-        // Inicializar Adapter con lista vacía
+        // Configurar RecyclerView
+        rvMedicos.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MedicosAdapter(new ArrayList<>());
         rvMedicos.setAdapter(adapter);
 
         // Observar cambios en la base de datos
-        AppDatabase.getInstance(this).medicoDao().allMedicos().observe(this, new Observer<List<Medico>>() {
-            @Override
-            public void onChanged(List<Medico> medicos) {
-                adapter.setMedicos(medicos); // actualiza la lista en el adapter
-            }
-        });
+        AppDatabase.getInstance(this)
+                .medicoDao()
+                .allMedicos()
+                .observe(this, adapter::setMedicos);
+
+        // Botón de volver a MainActivity
+        btnVolver.setOnClickListener(v -> finish());
     }
 }
