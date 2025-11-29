@@ -17,13 +17,15 @@
         android:paddingTop="16dp"
         android:paddingBottom="16dp">
 
-        <!-- CardView con descripción y botón volver -->
+        <!-- CARD DEL PACIENTE CON FLECHAS Y INFO -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardPaciente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
+            android:layout_margin="16dp"
             app:cardElevation="8dp"
-            android:layout_margin="16dp">
+            app:cardCornerRadius="16dp"
+            android:background="@android:color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -31,33 +33,118 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <TextView
-                    android:id="@+id/tvDescripcionPacientes"
+                <!-- INFO DEL PACIENTE + FLECHAS -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Aquí encontrarás información y herramientas diseñadas para pacientes: historial médico, citas y más."
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="16dp"/>
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
-                <Button
-                    android:id="@+id/btnVolverPacientes"
+                    <ImageButton
+                        android:id="@+id/btnAnteriorPaciente"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_arrow_left"
+                        android:contentDescription="Anterior"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:paddingHorizontal="16dp">
+
+                        <TextView
+                            android:id="@+id/tvNombrePaciente"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nombre del paciente"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"/>
+
+                        <TextView
+                            android:id="@+id/tvEdadPaciente"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Edad: 0"
+                            android:textSize="16sp"
+                            android:textColor="@android:color/darker_gray"/>
+
+                        <TextView
+                            android:id="@+id/tvEmailPaciente"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Email"
+                            android:textSize="16sp"
+                            android:textColor="@android:color/darker_gray"/>
+
+                        <TextView
+                            android:id="@+id/tvDiagnosticoPaciente"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Diagnóstico"
+                            android:textSize="16sp"
+                            android:textColor="@android:color/darker_gray"/>
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/btnSiguientePaciente"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_arrow_right"
+                        android:contentDescription="Siguiente"/>
+                </LinearLayout>
+
+                <!-- BOTONES DE ACCIÓN VERTICALES CON COLORES -->
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="Volver"
-                    android:backgroundTint="@android:color/darker_gray"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp">
+
+                    <Button
+                        android:id="@+id/btnAgregarPaciente"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="Agregar"
+                        android:layout_marginBottom="8dp"
+                        android:backgroundTint="@android:color/holo_green_dark"
+                        android:textColor="@android:color/white"/>
+
+                    <Button
+                        android:id="@+id/btnModificarPaciente"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="Modificar"
+                        android:layout_marginBottom="8dp"
+                        android:backgroundTint="@android:color/holo_orange_light"
+                        android:textColor="@android:color/white"/>
+
+                    <Button
+                        android:id="@+id/btnEliminarPaciente"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="Eliminar"
+                        android:layout_marginBottom="8dp"
+                        android:backgroundTint="@android:color/holo_red_dark"
+                        android:textColor="@android:color/white"/>
+
+                    <Button
+                        android:id="@+id/btnVolverPacientes"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="Volver"
+                        android:backgroundTint="@android:color/darker_gray"
+                        android:textColor="@android:color/white"/>
+                </LinearLayout>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
-        <!-- RecyclerView para mostrar lista de pacientes -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvPacientes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:overScrollMode="never"
-            android:scrollbars="vertical"
-            android:layout_marginTop="16dp"/>
 
     </LinearLayout>
 </ScrollView>
