@@ -30,36 +30,56 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
+                <!-- TEXTO INFORMATIVO CENTRADO -->
+                <TextView
+                    android:id="@+id/tvInfoMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bienvenido a nuestro hospital. Qué se te ofrece?"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:gravity="center"
+                    android:paddingBottom="16dp"/>
+
+                <!-- BOTÓN MÉDICOS -->
                 <Button
                     android:id="@+id/btnMedicos"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="Médicos"
                     android:backgroundTint="@android:color/holo_red_dark"
+                    android:textColor="@android:color/white"
                     android:layout_marginBottom="8dp"/>
 
+                <!-- BOTÓN PACIENTES -->
                 <Button
                     android:id="@+id/btnPacientes"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="Pacientes"
                     android:backgroundTint="@android:color/holo_blue_light"
+                    android:textColor="@android:color/white"
                     android:layout_marginBottom="8dp"/>
 
+                <!-- BOTÓN ACERCA -->
                 <Button
                     android:id="@+id/btnAcerca"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="Acerca"
                     android:backgroundTint="@android:color/holo_green_light"
+                    android:textColor="@android:color/white"
                     android:layout_marginBottom="8dp"/>
 
+                <!-- BOTÓN LOGOUT -->
                 <Button
                     android:id="@+id/btnLogout"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="Cerrar sesión"
-                    android:backgroundTint="@android:color/darker_gray"/>
+                    android:backgroundTint="@android:color/darker_gray"
+                    android:textColor="@android:color/white"/>
 
             </LinearLayout>
 
@@ -68,3 +88,4 @@
     </LinearLayout>
 
 </ScrollView>
+

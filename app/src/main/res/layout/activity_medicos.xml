@@ -17,7 +17,6 @@
         android:paddingTop="16dp"
         android:paddingBottom="16dp">
 
-        <!-- CARD DEL MÉDICO CON FLECHAS Y BOTONES DE ACCIÓN -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardMedico"
             android:layout_width="match_parent"
@@ -33,7 +32,19 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- INFO DEL MÉDICO + FLECHAS -->
+                <!-- Título -->
+                <TextView
+                    android:id="@+id/tvInfoMedicos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Información de cada médico:"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:gravity="center"
+                    android:paddingBottom="16dp"/>
+
+                <!-- Info -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -41,7 +52,7 @@
                     android:gravity="center_vertical">
 
                     <ImageButton
-                        android:id="@+id/btnAnterior"
+                        android:id="@+id/btnAnteriorMedico"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="@android:color/transparent"
@@ -59,38 +70,34 @@
                             android:id="@+id/tvNombreMedico"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Nombre del médico"
+                            android:text="Nombre"
                             android:textSize="20sp"
-                            android:textStyle="bold"
-                            android:textColor="@android:color/black"/>
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:id="@+id/tvMatriculaMedico"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Matrícula: 0000"
-                            android:textSize="16sp"
-                            android:textColor="@android:color/darker_gray"/>
+                            android:text="Matrícula:"
+                            android:textSize="16sp"/>
 
                         <TextView
                             android:id="@+id/tvEspecialidadMedico"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Especialidad"
-                            android:textSize="16sp"
-                            android:textColor="@android:color/darker_gray"/>
+                            android:text="Especialidad:"
+                            android:textSize="16sp"/>
 
                         <TextView
                             android:id="@+id/tvEmailMedico"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Email"
-                            android:textSize="16sp"
-                            android:textColor="@android:color/darker_gray"/>
+                            android:text="Email:"
+                            android:textSize="16sp"/>
                     </LinearLayout>
 
                     <ImageButton
-                        android:id="@+id/btnSiguiente"
+                        android:id="@+id/btnSiguienteMedico"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="@android:color/transparent"
@@ -98,41 +105,39 @@
                         android:contentDescription="Siguiente"/>
                 </LinearLayout>
 
-                <!-- BOTONES DE ACCIÓN UNO DEBAJO DEL OTRO CON COLORES -->
+                <!-- BOTONES ACCIÓN -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:gravity="center"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="16dp">
+                    android:paddingTop="16dp">
 
                     <Button
                         android:id="@+id/btnAgregarMedico"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:text="Agregar"
-                        android:layout_marginBottom="8dp"
                         android:backgroundTint="@android:color/holo_green_dark"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/white"
+                        android:layout_marginBottom="8dp"/>
 
                     <Button
                         android:id="@+id/btnModificarMedico"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:text="Modificar"
-                        android:layout_marginBottom="8dp"
                         android:backgroundTint="@android:color/holo_orange_light"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/white"
+                        android:layout_marginBottom="8dp"/>
 
                     <Button
                         android:id="@+id/btnEliminarMedico"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:text="Eliminar"
-                        android:layout_marginBottom="8dp"
                         android:backgroundTint="@android:color/holo_red_dark"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/white"
+                        android:layout_marginBottom="8dp"/>
 
                     <Button
                         android:id="@+id/btnVolverMedicos"
@@ -143,9 +148,7 @@
                         android:textColor="@android:color/white"/>
                 </LinearLayout>
 
-
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
     </LinearLayout>
 </ScrollView>

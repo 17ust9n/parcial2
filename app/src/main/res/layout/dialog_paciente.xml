@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/etNombrePaciente"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Nombre"/>
+
+    <EditText
+        android:id="@+id/etEdadPaciente"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:inputType="number"
+        android:hint="Edad"
+        android:layout_marginTop="8dp"/>
+
+    <EditText
+        android:id="@+id/etEmailPaciente"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:inputType="textEmailAddress"
+        android:hint="Email"
+        android:layout_marginTop="8dp"/>
+
+    <EditText
+        android:id="@+id/etDiagnosticoPaciente"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Diagnóstico"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/btnGuardarPaciente"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Guardar"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/btnSalirPaciente"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:backgroundTint="@android:color/darker_gray"
+        android:text="Salir"
+        android:layout_marginTop="8dp"/>
+</LinearLayout>

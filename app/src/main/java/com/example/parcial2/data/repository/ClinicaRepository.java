@@ -68,7 +68,7 @@ public class ClinicaRepository {
         Map<String, Object> data = new HashMap<>();
         data.put("nombre", medico.getNombre());
         data.put("especialidad", medico.getEspecialidad());
-        data.put("telefono", medico.getTelefono());
+        data.put("matricula", medico.getMatricula());
 
         firestore.collection("medicos")
                 .document(String.valueOf(medico.getId()))

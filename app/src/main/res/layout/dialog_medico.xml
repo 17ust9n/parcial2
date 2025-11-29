@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/etNombreMedico"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Nombre"/>
+
+    <EditText
+        android:id="@+id/etMatriculaMedico"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Matrícula"
+        android:layout_marginTop="8dp"/>
+
+    <EditText
+        android:id="@+id/etEspecialidadMedico"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Especialidad"
+        android:layout_marginTop="8dp"/>
+
+    <EditText
+        android:id="@+id/etEmailMedico"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/btnGuardarMedico"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Guardar"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/btnSalirMedico"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Salir"
+        android:backgroundTint="@android:color/darker_gray"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="8dp"/>
+
+</LinearLayout>

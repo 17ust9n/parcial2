@@ -7,7 +7,7 @@
     android:padding="16dp"
     android:background="@color/rojo">
 
-    <!-- CardView para contener el formulario -->
+    <!-- CARDVIEW CENTRADO -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardLogin"
         android:layout_width="0dp"
@@ -18,16 +18,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.5">
 
-        <!-- Contenedor vertical para los campos y botones -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Email -->
+            <!-- MENSAJE AL INICIO -->
+            <TextView
+                android:id="@+id/tvInfoLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Por favor, ingresá tus datos:"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_gravity="center"
+                android:paddingBottom="12dp"/>
+
+            <!-- EMAIL -->
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
@@ -35,9 +48,9 @@
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:padding="4dp"
-                android:layout_marginBottom="4dp"/>
+                android:layout_marginBottom="8dp"/>
 
-            <!-- Password -->
+            <!-- PASSWORD -->
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
@@ -45,18 +58,19 @@
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:padding="4dp"
-                android:layout_marginBottom="4dp"/>
+                android:layout_marginBottom="12dp"/>
 
-            <!-- Login -->
+            <!-- BOTÓN LOGIN -->
             <Button
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="Ingresar"
                 android:backgroundTint="@android:color/holo_green_light"
-                android:layout_marginBottom="4dp"/>
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="8dp"/>
 
-            <!-- Register -->
+            <!-- BOTÓN REGISTER -->
             <Button
                 android:id="@+id/btnRegister"
                 android:layout_width="match_parent"
@@ -68,4 +82,6 @@
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 

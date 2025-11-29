@@ -33,6 +33,17 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
+                <!-- MENSAJE INICIAL -->
+                <TextView
+                    android:id="@+id/tvTituloPaciente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Información de cada paciente:"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:layout_marginBottom="12dp"/>
+
                 <!-- INFO DEL PACIENTE + FLECHAS -->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -60,8 +71,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nombre del paciente"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
+                            android:textSize="16sp"
                             android:textColor="@android:color/black"/>
 
                         <TextView

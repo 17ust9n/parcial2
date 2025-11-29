@@ -5,19 +5,20 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class Medico {
+
     @PrimaryKey(autoGenerate = true)
     private int id;
 
     private String nombre;
-    private String email;
+    private String matricula;
     private String especialidad;
-    private String telefono;
+    private String email;
 
-    public Medico(String nombre, String email, String especialidad, String telefono) {
+    public Medico(String nombre, String matricula, String especialidad, String email) {
         this.nombre = nombre;
-        this.email = email;
+        this.matricula = matricula;
         this.especialidad = especialidad;
-        this.telefono = telefono;
+        this.email = email;
     }
 
     // Getters y setters
@@ -27,12 +28,12 @@ public class Medico {
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public String getMatricula() { return matricula; }
+    public void setMatricula(String matricula) { this.matricula = matricula; }
 
     public String getEspecialidad() { return especialidad; }
     public void setEspecialidad(String especialidad) { this.especialidad = especialidad; }
 
-    public String getTelefono() { return telefono; }
-    public void setTelefono(String telefono) { this.telefono = telefono; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 }

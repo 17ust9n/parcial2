@@ -29,9 +29,9 @@ public class MedicosAdapter extends RecyclerView.Adapter<MedicosAdapter.MedicoVi
     public void onBindViewHolder(@NonNull MedicoViewHolder holder, int position) {
         Medico medico = medicos.get(position);
         holder.tvNombre.setText(medico.getNombre());
+        holder.tvMatricula.setText(medico.getMatricula()); // cambio aquí
         holder.tvEspecialidad.setText(medico.getEspecialidad());
         holder.tvEmail.setText(medico.getEmail());
-        holder.tvTelefono.setText(medico.getTelefono());
     }
 
     @Override
@@ -45,14 +45,14 @@ public class MedicosAdapter extends RecyclerView.Adapter<MedicosAdapter.MedicoVi
     }
 
     static class MedicoViewHolder extends RecyclerView.ViewHolder {
-        TextView tvNombre, tvEspecialidad, tvEmail, tvTelefono;
+        TextView tvNombre, tvMatricula, tvEspecialidad, tvEmail; // cambio aquí
 
         public MedicoViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNombre = itemView.findViewById(R.id.tvNombre);
+            tvMatricula = itemView.findViewById(R.id.tvMatricula); // cambio aquí
             tvEspecialidad = itemView.findViewById(R.id.tvEspecialidad);
             tvEmail = itemView.findViewById(R.id.tvEmail);
-            tvTelefono = itemView.findViewById(R.id.tvTelefono);
         }
     }
 }
