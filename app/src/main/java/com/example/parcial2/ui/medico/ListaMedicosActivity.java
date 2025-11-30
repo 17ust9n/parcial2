@@ -49,35 +49,40 @@ public class ListaMedicosActivity extends AppCompatActivity {
         btnEliminar = findViewById(R.id.btnEliminarMedico);
         btnVolver = findViewById(R.id.btnVolverMedicos);
 
-        // Cargar médicos
+        // Cargar médicos y observar cambios
         repo.obtenerMedicos().observe(this, lista -> {
             if (lista == null || lista.isEmpty()) {
                 agregarMedicosPrueba();
             } else {
                 medicos = lista;
+                index = 0;
                 mostrarMedico(index);
             }
         });
 
         // Navegación
         btnAnterior.setOnClickListener(v -> {
-            if (index > 0) index--;
-            mostrarMedico(index);
+            if (!medicos.isEmpty() && index > 0) {
+                index--;
+                mostrarMedico(index);
+            }
         });
 
         btnSiguiente.setOnClickListener(v -> {
-            if (index < medicos.size() - 1) index++;
-            mostrarMedico(index);
+            if (!medicos.isEmpty() && index < medicos.size() - 1) {
+                index++;
+                mostrarMedico(index);
+            }
         });
 
+        // Botón volver
         btnVolver.setOnClickListener(v -> finish());
 
+        // Botones CRUD
         btnAgregar.setOnClickListener(v -> mostrarDialogoMedico(true));
-
         btnModificar.setOnClickListener(v -> {
             if (!medicos.isEmpty()) mostrarDialogoMedico(false);
         });
-
         btnEliminar.setOnClickListener(v -> {
             if (medicos.isEmpty()) return;
 
@@ -85,7 +90,7 @@ public class ListaMedicosActivity extends AppCompatActivity {
             repo.eliminarMedico(actual);
             medicos.remove(index);
 
-            if (index > 0) index--;
+            if (index >= medicos.size()) index = medicos.size() - 1;
             mostrarMedico(index);
 
             Snackbar.make(findViewById(android.R.id.content),
@@ -134,7 +139,7 @@ public class ListaMedicosActivity extends AppCompatActivity {
         Button btnGuardar = view.findViewById(R.id.btnGuardarMedico);
         Button btnSalir = view.findViewById(R.id.btnSalirMedico);
 
-        if (!modoAgregar) {
+        if (!modoAgregar && !medicos.isEmpty()) {
             Medico actual = medicos.get(index);
             etNombre.setText(actual.getNombre());
             etMatricula.setText(actual.getMatricula());

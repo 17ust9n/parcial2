@@ -11,7 +11,7 @@ import com.example.parcial2.model.Paciente;
 
 @Database(
         entities = {Medico.class, Paciente.class},
-        version = 1,
+        version = 2,  // versión incrementada
         exportSchema = false
 )
 public abstract class AppDatabase extends RoomDatabase {
@@ -32,7 +32,7 @@ public abstract class AppDatabase extends RoomDatabase {
                                     AppDatabase.class,
                                     "parcial2_db"
                             )
-                            .fallbackToDestructiveMigration()
+                            .fallbackToDestructiveMigration() // borra y recrea la BD si cambia la versión
                             .build();
                 }
             }
