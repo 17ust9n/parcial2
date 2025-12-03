@@ -61,27 +61,37 @@
                 android:layout_marginBottom="12dp"/>
 
             <!-- BOTÓN LOGIN -->
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="64dp"
                 android:text="Ingresar"
-                android:backgroundTint="@android:color/holo_green_light"
                 android:textColor="@android:color/white"
-                android:layout_marginBottom="8dp"/>
+                android:backgroundTint="@android:color/holo_green_light"
+                app:icon="@drawable/ic_login"
+                app:iconGravity="textStart"
+                app:iconPadding="12dp"
+                app:iconSize="32dp"
+                app:iconTint="@null"
+                android:layout_marginBottom="12dp"/>
 
             <!-- BOTÓN REGISTER -->
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnRegister"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="No tenés cuenta? Creá una"/>
+                android:layout_height="64dp"
+                android:text="No tenés cuenta? Creá una"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@android:color/holo_blue_light"
+                app:icon="@drawable/ic_register"
+                app:iconGravity="textStart"
+                app:iconPadding="12dp"
+                app:iconSize="32dp"
+                app:iconTint="@null"/>
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 

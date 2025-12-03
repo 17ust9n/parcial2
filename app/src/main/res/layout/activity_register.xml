@@ -42,7 +42,6 @@
                     android:gravity="center"
                     android:paddingBottom="12dp"/>
 
-
                 <!-- Email -->
                 <EditText
                     android:id="@+id/email"
@@ -73,22 +72,34 @@
                     android:padding="4dp"
                     android:layout_marginBottom="12dp"/>
 
-                <!-- Botón Crear Cuenta (VERDE) -->
-                <Button
+                <!-- Botón Crear Cuenta -->
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCrear"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="64dp"
                     android:text="Crear Cuenta"
-                    android:backgroundTint="@android:color/holo_green_light"
                     android:textColor="@android:color/white"
-                    android:layout_marginBottom="8dp"/>
+                    android:backgroundTint="@android:color/holo_green_light"
+                    app:icon="@drawable/ic_register"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:iconSize="32dp"
+                    app:iconTint="@null"
+                    android:layout_marginBottom="12dp"/>
 
-                <!-- Botón Volver (VIOLETA SEGÚN LO QUE TE GUSTA) -->
-                <Button
+                <!-- Botón Volver a Login -->
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnVolverLogin"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="Volver a Login"/>
+                    android:layout_height="64dp"
+                    android:text="Volver a Login"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@android:color/darker_gray"
+                    app:icon="@drawable/ic_logout"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:iconSize="32dp"
+                    app:iconTint="@null"/>
 
             </LinearLayout>
 
@@ -97,4 +108,3 @@
     </LinearLayout>
 
 </ScrollView>
-

@@ -36,51 +36,70 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Bienvenido a nuestro hospital. Qué se te ofrece?"
-                    android:textSize="22sp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/black"
                     android:gravity="center"
                     android:paddingBottom="16dp"/>
 
                 <!-- BOTÓN MÉDICOS -->
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnMedicos"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="64dp"
                     android:text="Médicos"
-                    android:backgroundTint="@android:color/holo_red_dark"
                     android:textColor="@android:color/white"
-                    android:layout_marginBottom="8dp"/>
+                    android:backgroundTint="@android:color/holo_red_dark"
+                    app:icon="@drawable/ic_medico"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:iconSize="32dp"
+                    app:iconTint="@null"
+                    android:layout_marginBottom="12dp"/>
 
                 <!-- BOTÓN PACIENTES -->
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnPacientes"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="64dp"
                     android:text="Pacientes"
-                    android:backgroundTint="@android:color/holo_blue_light"
                     android:textColor="@android:color/white"
-                    android:layout_marginBottom="8dp"/>
+                    android:backgroundTint="@android:color/holo_blue_light"
+                    app:icon="@drawable/ic_paciente"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:iconSize="32dp"
+                    app:iconTint="@null"
+                    android:layout_marginBottom="12dp"/>
 
                 <!-- BOTÓN ACERCA -->
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAcerca"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="64dp"
                     android:text="Acerca"
-                    android:backgroundTint="@android:color/holo_green_light"
                     android:textColor="@android:color/white"
-                    android:layout_marginBottom="8dp"/>
+                    android:backgroundTint="@android:color/holo_green_light"
+                    app:icon="@drawable/ic_pregunta"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:iconSize="32dp"
+                    app:iconTint="@null"
+                    android:layout_marginBottom="12dp"/>
 
                 <!-- BOTÓN LOGOUT -->
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnLogout"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="64dp"
                     android:text="Cerrar sesión"
+                    android:textColor="@android:color/white"
                     android:backgroundTint="@android:color/darker_gray"
-                    android:textColor="@android:color/white"/>
-
+                    app:icon="@drawable/ic_logout"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:iconSize="32dp"
+                    app:iconTint="@null"/>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -88,4 +107,3 @@
     </LinearLayout>
 
 </ScrollView>
-

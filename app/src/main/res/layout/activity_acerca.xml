@@ -30,6 +30,18 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
+                <!-- TÍTULO DE LA PANTALLA -->
+                <TextView
+                    android:id="@+id/tvTituloAcerca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Acerca de Nosotros"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp"/>
+
                 <!-- Texto descriptivo de la empresa -->
                 <TextView
                     android:id="@+id/tvDescripcion"
@@ -41,12 +53,19 @@
                     android:layout_marginBottom="16dp"/>
 
                 <!-- Botón volver a MainActivity -->
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnVolver"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="64dp"
                     android:text="Volver"
-                    android:backgroundTint="@android:color/darker_gray"/>
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@android:color/darker_gray"
+                    app:icon="@drawable/ic_volver"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:iconSize="32dp"
+                    app:iconTint="@null"
+                    android:layout_marginBottom="12dp"/>
 
             </LinearLayout>
 

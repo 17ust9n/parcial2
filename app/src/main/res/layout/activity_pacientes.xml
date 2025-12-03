@@ -108,7 +108,7 @@
                         android:contentDescription="Siguiente"/>
                 </LinearLayout>
 
-                <!-- BOTONES DE ACCIÓN VERTICALES CON COLORES -->
+                <!-- BOTONES DE ACCIÓN VERTICALES CON ICONOS -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -117,40 +117,64 @@
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp">
 
-                    <Button
+                    <!-- Agregar -->
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnAgregarPaciente"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
+                        android:layout_height="64dp"
                         android:text="Agregar"
-                        android:layout_marginBottom="8dp"
+                        android:textColor="@android:color/white"
                         android:backgroundTint="@android:color/holo_green_dark"
-                        android:textColor="@android:color/white"/>
+                        app:icon="@drawable/ic_agregar"
+                        app:iconGravity="textStart"
+                        app:iconPadding="12dp"
+                        app:iconSize="32dp"
+                        app:iconTint="@null"
+                        android:layout_marginBottom="12dp"/>
 
-                    <Button
+                    <!-- Modificar -->
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnModificarPaciente"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
+                        android:layout_height="64dp"
                         android:text="Modificar"
-                        android:layout_marginBottom="8dp"
+                        android:textColor="@android:color/white"
                         android:backgroundTint="@android:color/holo_orange_light"
-                        android:textColor="@android:color/white"/>
+                        app:icon="@drawable/ic_modificar"
+                        app:iconGravity="textStart"
+                        app:iconPadding="12dp"
+                        app:iconSize="32dp"
+                        app:iconTint="@null"
+                        android:layout_marginBottom="12dp"/>
 
-                    <Button
+                    <!-- Eliminar -->
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnEliminarPaciente"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
+                        android:layout_height="64dp"
                         android:text="Eliminar"
-                        android:layout_marginBottom="8dp"
+                        android:textColor="@android:color/white"
                         android:backgroundTint="@android:color/holo_red_dark"
-                        android:textColor="@android:color/white"/>
+                        app:icon="@drawable/ic_eliminar"
+                        app:iconGravity="textStart"
+                        app:iconPadding="12dp"
+                        app:iconSize="32dp"
+                        app:iconTint="@null"
+                        android:layout_marginBottom="12dp"/>
 
-                    <Button
+                    <!-- Volver -->
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnVolverPacientes"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
+                        android:layout_height="64dp"
                         android:text="Volver"
+                        android:textColor="@android:color/white"
                         android:backgroundTint="@android:color/darker_gray"
-                        android:textColor="@android:color/white"/>
+                        app:icon="@drawable/ic_volver"
+                        app:iconGravity="textStart"
+                        app:iconPadding="12dp"
+                        app:iconSize="32dp"
+                        app:iconTint="@null"/>
                 </LinearLayout>
 
             </LinearLayout>
