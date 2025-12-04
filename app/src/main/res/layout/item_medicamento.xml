@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvNombreMedicamentoItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tvUsoMedicamentoItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Uso"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tvLaboratorioMedicamentoItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Laboratorio"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tvDosisMedicamentoItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dosis"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tvEfectosMedicamentoItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Efectos secundarios"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tvPrecioMedicamentoItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Precio"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tvVencimientoMedicamentoItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fecha de vencimiento"
+        android:textSize="16sp"/>
+
+</LinearLayout>

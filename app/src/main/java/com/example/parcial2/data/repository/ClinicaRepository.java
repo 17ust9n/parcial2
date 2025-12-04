@@ -8,8 +8,10 @@ import androidx.lifecycle.LiveData;
 import com.example.parcial2.data.local.AppDatabase;
 import com.example.parcial2.data.local.MedicoDao;
 import com.example.parcial2.data.local.PacienteDao;
+import com.example.parcial2.data.local.MedicamentoDao;
 import com.example.parcial2.model.Medico;
 import com.example.parcial2.model.Paciente;
+import com.example.parcial2.model.Medicamento;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -22,6 +24,7 @@ public class ClinicaRepository {
 
     private final MedicoDao medicoDao;
     private final PacienteDao pacienteDao;
+    private final MedicamentoDao medicamentoDao;
     private final FirebaseFirestore firestore;
 
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -30,6 +33,7 @@ public class ClinicaRepository {
         AppDatabase db = AppDatabase.getInstance(application);
         medicoDao = db.medicoDao();
         pacienteDao = db.pacienteDao();
+        medicamentoDao = db.medicamentoDao();
         firestore = FirebaseFirestore.getInstance();
     }
 
@@ -80,13 +84,13 @@ public class ClinicaRepository {
     //        PACIENTES
     // ============================
     public LiveData<List<Paciente>> obtenerPacientes() {
-        return pacienteDao.allPacientes(); // usar método correcto del DAO
+        return pacienteDao.allPacientes();
     }
 
     public void insertarPaciente(Paciente paciente) {
         executor.execute(() -> {
             long id = pacienteDao.insertar(paciente);
-            paciente.setId((int) id); // usar setter
+            paciente.setId((int) id);
             guardarPacienteEnFirestore(paciente);
         });
     }
@@ -113,11 +117,56 @@ public class ClinicaRepository {
         data.put("edad", paciente.getEdad());
         data.put("email", paciente.getEmail());
         data.put("diagnostico", paciente.getDiagnostico());
-        // no hay medicoId
 
         firestore.collection("pacientes")
                 .document(String.valueOf(paciente.getId()))
                 .set(data)
                 .addOnSuccessListener(a -> Log.d("FIRESTORE", "Paciente guardado."));
+    }
+
+    // ============================
+    //        MEDICAMENTOS
+    // ============================
+    public LiveData<List<Medicamento>> obtenerMedicamentos() {
+        return medicamentoDao.allMedicamentos();
+    }
+
+    public void insertarMedicamento(Medicamento medicamento) {
+        executor.execute(() -> {
+            long id = medicamentoDao.insertar(medicamento);
+            medicamento.setId((int) id);
+            guardarMedicamentoEnFirestore(medicamento);
+        });
+    }
+
+    public void actualizarMedicamento(Medicamento medicamento) {
+        executor.execute(() -> {
+            medicamentoDao.actualizar(medicamento);
+            guardarMedicamentoEnFirestore(medicamento);
+        });
+    }
+
+    public void eliminarMedicamento(Medicamento medicamento) {
+        executor.execute(() -> {
+            medicamentoDao.eliminar(medicamento);
+            firestore.collection("medicamentos")
+                    .document(String.valueOf(medicamento.getId()))
+                    .delete();
+        });
+    }
+
+    private void guardarMedicamentoEnFirestore(Medicamento medicamento) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("nombre", medicamento.getNombre());
+        data.put("uso", medicamento.getUso());
+        data.put("dosis", medicamento.getDosis());
+        data.put("efectos", medicamento.getEfectos());
+        data.put("precio", medicamento.getPrecio());
+        data.put("vencimiento", medicamento.getVencimiento());
+
+        firestore.collection("medicamentos")
+                .document(String.valueOf(medicamento.getId()))
+                .set(data)
+                .addOnSuccessListener(a -> Log.d("FIRESTORE", "Medicamento guardado."));
     }
 }

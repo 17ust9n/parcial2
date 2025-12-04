@@ -7,34 +7,61 @@
     android:padding="16dp">
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/nombre"
+            android:id="@+id/etNombreNuevoMed"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:hint="Nombre"
             android:layout_marginTop="8dp"/>
 
         <EditText
-            android:id="@+id/edad"
+            android:id="@+id/etUsoNuevoMed"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:hint="Edad"
-            android:inputType="number"
+            android:hint="Uso"
             android:layout_marginTop="8dp"/>
 
         <EditText
-            android:id="@+id/diagnostico"
+            android:id="@+id/etLaboratorioNuevoMed"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:hint="Diagnóstico"
+            android:hint="Laboratorio"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/etDosisNuevoMed"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="Dosis"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/etEfectosNuevoMed"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="Efectos secundarios"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/etPrecioNuevoMed"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="Precio"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/etVencimientoNuevoMed"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="Fecha de vencimiento"
             android:layout_marginTop="8dp"/>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnGuardar"
+            android:id="@+id/btnGuardarNuevoMed"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:text="Guardar"

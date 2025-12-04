@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/etNombreMedicamento"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Nombre"/>
+
+        <EditText
+            android:id="@+id/etUsoMedicamento"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Uso"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/etLaboratorioMedicamento"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Laboratorio"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/etDosisMedicamento"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Dosis"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/etEfectosMedicamento"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Efectos secundarios"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/etPrecioMedicamento"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Precio"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/etVencimientoMedicamento"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Fecha de vencimiento"
+            android:inputType="date"
+            android:layout_marginTop="8dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGuardarMedicamento"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Guardar"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@android:color/holo_green_dark"
+            app:icon="@drawable/ic_guardar"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:iconTint="@null"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSalirMedicamento"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Salir"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@android:color/darker_gray"
+            app:icon="@drawable/ic_volver"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:iconTint="@null"/>
+    </LinearLayout>
+</ScrollView>

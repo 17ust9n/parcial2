@@ -47,6 +47,11 @@
             android:name=".ui.medico.ListaMedicosActivity"
             android:exported="true" />
 
+        <!-- ListaMedicamentosActivity -->
+        <activity
+            android:name=".ui.medicamento.ListaMedicamentosActivity"
+            android:exported="true" />
+
     </application>
 
 </manifest>
