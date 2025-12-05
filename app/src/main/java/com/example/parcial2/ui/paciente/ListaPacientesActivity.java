@@ -49,15 +49,14 @@ public class ListaPacientesActivity extends AppCompatActivity {
         btnEliminar = findViewById(R.id.btnEliminarPaciente);
         btnVolver = findViewById(R.id.btnVolverPacientes);
 
-        // Limpiar BD y agregar pacientes de prueba
-        repo.eliminarTodosPacientes();
-        agregarPacientesPrueba();
+        // Cargar pacientes de prueba solo si la BD está vacía
+        agregarPacientesPruebaSoloSiEstaVacia();
 
-        // Observar BD
+        // Observar cambios en la BD
         repo.obtenerPacientes().observe(this, lista -> {
             pacientes = lista;
 
-            if (pacientes == null || pacientes.isEmpty()) {
+            if (pacientes.isEmpty()) {
                 mostrarPacienteVacio();
                 return;
             }
@@ -93,9 +92,7 @@ public class ListaPacientesActivity extends AppCompatActivity {
         btnEliminar.setOnClickListener(v -> {
             if (pacientes.isEmpty()) return;
 
-            Paciente actual = pacientes.get(index);
-            repo.eliminarPaciente(actual);
-
+            repo.eliminarPaciente(pacientes.get(index));
             Snackbar.make(findViewById(android.R.id.content),
                     "Paciente eliminado correctamente",
                     Snackbar.LENGTH_SHORT).show();
@@ -103,11 +100,6 @@ public class ListaPacientesActivity extends AppCompatActivity {
     }
 
     private void mostrarPaciente(int i) {
-        if (pacientes.isEmpty()) {
-            mostrarPacienteVacio();
-            return;
-        }
-
         Paciente p = pacientes.get(i);
 
         tvNombre.setText("Nombre: " + p.getNombre());
@@ -115,25 +107,14 @@ public class ListaPacientesActivity extends AppCompatActivity {
         tvEmail.setText("Email: " + p.getEmail());
         tvDiagnostico.setText("Diagnóstico: " + p.getDiagnostico());
 
-        // Flecha anterior
-        if (i > 0) {
-            btnAnterior.setEnabled(true);
-            btnAnterior.setColorFilter(getResources().getColor(R.color.rojo, null));
-        } else {
-            btnAnterior.setEnabled(false);
-            btnAnterior.setColorFilter(getResources().getColor(R.color.gris, null));
-        }
+        // Flecha izquierda
+        btnAnterior.setEnabled(i > 0);
+        btnAnterior.setColorFilter(getColor(i > 0 ? R.color.rojo : R.color.gris));
 
-        // Flecha siguiente
-        if (i < pacientes.size() - 1) {
-            btnSiguiente.setEnabled(true);
-            btnSiguiente.setColorFilter(getResources().getColor(R.color.rojo, null));
-        } else {
-            btnSiguiente.setEnabled(false);
-            btnSiguiente.setColorFilter(getResources().getColor(R.color.gris, null));
-        }
+        // Flecha derecha
+        btnSiguiente.setEnabled(i < pacientes.size() - 1);
+        btnSiguiente.setColorFilter(getColor(i < pacientes.size() - 1 ? R.color.rojo : R.color.gris));
 
-        // Botones modificar y eliminar
         btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
     }
@@ -150,9 +131,14 @@ public class ListaPacientesActivity extends AppCompatActivity {
         btnEliminar.setEnabled(false);
     }
 
-    private void agregarPacientesPrueba() {
-        repo.insertarPaciente(new Paciente("Luis Martínez", 40, "luis@correo.com", "Dolor de cabeza"));
-        repo.insertarPaciente(new Paciente("María López", 32, "maria@correo.com", "Alergia"));
+    // Solo agrega los 2 pacientes si la BD está vacía
+    private void agregarPacientesPruebaSoloSiEstaVacia() {
+        repo.obtenerPacientes().observe(this, lista -> {
+            if (lista == null || lista.isEmpty()) {
+                repo.insertarPaciente(new Paciente("Luis Martínez", 40, "luis@correo.com", "Dolor de cabeza"));
+                repo.insertarPaciente(new Paciente("María López", 32, "maria@correo.com", "Alergia"));
+            }
+        });
     }
 
     private void mostrarDialogoPaciente(boolean modoAgregar) {
@@ -186,12 +172,10 @@ public class ListaPacientesActivity extends AppCompatActivity {
             String email = etEmail.getText().toString().trim();
             String diagnostico = etDiagnostico.getText().toString().trim();
 
-            boolean error = false;
-            if (nombre.isEmpty()) { etNombre.setError("Complete este campo"); error = true; }
-            if (edadStr.isEmpty()) { etEdad.setError("Complete este campo"); error = true; }
-            if (email.isEmpty()) { etEmail.setError("Complete este campo"); error = true; }
-            if (diagnostico.isEmpty()) { etDiagnostico.setError("Complete este campo"); error = true; }
-            if (error) return;
+            if (nombre.isEmpty()) { etNombre.setError("Complete este campo"); return; }
+            if (edadStr.isEmpty()) { etEdad.setError("Complete este campo"); return; }
+            if (email.isEmpty()) { etEmail.setError("Complete este campo"); return; }
+            if (diagnostico.isEmpty()) { etDiagnostico.setError("Complete este campo"); return; }
 
             int edad = Integer.parseInt(edadStr);
 
@@ -206,9 +190,6 @@ public class ListaPacientesActivity extends AppCompatActivity {
             }
 
             dialog.dismiss();
-            Snackbar.make(findViewById(android.R.id.content),
-                    modoAgregar ? "Paciente añadido correctamente" : "Paciente modificado correctamente",
-                    Snackbar.LENGTH_SHORT).show();
         });
 
         btnSalir.setOnClickListener(v -> dialog.dismiss());

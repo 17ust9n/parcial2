@@ -44,7 +44,7 @@
                     android:gravity="center"
                     android:paddingBottom="16dp"/>
 
-                <!-- Info + Flechas -->
+                <!-- Contenedor flechas + info -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:src="@drawable/ic_media_previous_azul"
+                        android:src="@drawable/ic_media_previous_red"
                         android:contentDescription="Anterior"
                         android:scaleType="fitCenter"/>
 
@@ -105,7 +105,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:src="@drawable/ic_media_next_azul"
+                        android:src="@drawable/ic_media_next_red"
                         android:contentDescription="Siguiente"
                         android:scaleType="fitCenter"/>
                 </LinearLayout>
@@ -117,7 +117,6 @@
                     android:orientation="vertical"
                     android:paddingTop="16dp">
 
-                    <!-- Agregar -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnAgregarPaciente"
                         android:layout_width="match_parent"
@@ -125,14 +124,8 @@
                         android:text="Agregar"
                         android:textColor="@android:color/white"
                         android:backgroundTint="@android:color/holo_green_dark"
-                        app:icon="@drawable/ic_agregar"
-                        app:iconGravity="textStart"
-                        app:iconPadding="12dp"
-                        app:iconSize="32dp"
-                        app:iconTint="@null"
                         android:layout_marginBottom="12dp"/>
 
-                    <!-- Modificar -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnModificarPaciente"
                         android:layout_width="match_parent"
@@ -140,14 +133,8 @@
                         android:text="Modificar"
                         android:textColor="@android:color/white"
                         android:backgroundTint="@android:color/holo_orange_light"
-                        app:icon="@drawable/ic_modificar"
-                        app:iconGravity="textStart"
-                        app:iconPadding="12dp"
-                        app:iconSize="32dp"
-                        app:iconTint="@null"
                         android:layout_marginBottom="12dp"/>
 
-                    <!-- Eliminar -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnEliminarPaciente"
                         android:layout_width="match_parent"
@@ -155,26 +142,15 @@
                         android:text="Eliminar"
                         android:textColor="@android:color/white"
                         android:backgroundTint="@android:color/holo_red_dark"
-                        app:icon="@drawable/ic_eliminar"
-                        app:iconGravity="textStart"
-                        app:iconPadding="12dp"
-                        app:iconSize="32dp"
-                        app:iconTint="@null"
                         android:layout_marginBottom="12dp"/>
 
-                    <!-- Volver -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnVolverPacientes"
                         android:layout_width="match_parent"
                         android:layout_height="64dp"
                         android:text="Volver"
                         android:textColor="@android:color/white"
-                        android:backgroundTint="@android:color/darker_gray"
-                        app:icon="@drawable/ic_volver"
-                        app:iconGravity="textStart"
-                        app:iconPadding="12dp"
-                        app:iconSize="32dp"
-                        app:iconTint="@null"/>
+                        android:backgroundTint="@android:color/darker_gray"/>
                 </LinearLayout>
 
             </LinearLayout>
