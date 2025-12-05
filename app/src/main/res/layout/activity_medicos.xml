@@ -44,20 +44,22 @@
                     android:gravity="center"
                     android:paddingBottom="16dp"/>
 
-                <!-- Info -->
+                <!-- Info + Flechas -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
 
+                    <!-- Flecha Anterior -->
                     <ImageButton
                         android:id="@+id/btnAnteriorMedico"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/ic_arrow_left"
-                        android:contentDescription="Anterior"/>
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_flecha_izquierda"
+                        android:contentDescription="Desplazar izquierda"
+                        android:scaleType="fitCenter"/>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -96,13 +98,16 @@
                             android:textSize="16sp"/>
                     </LinearLayout>
 
+                    <!-- Flecha Siguiente -->
                     <ImageButton
                         android:id="@+id/btnSiguienteMedico"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/ic_arrow_right"
-                        android:contentDescription="Siguiente"/>
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_flecha_derecha"
+                        android:contentDescription="Desplazar derecha"
+                        android:scaleType="fitCenter"/>
+
                 </LinearLayout>
 
                 <!-- BOTONES ACCIÓN -->
@@ -174,5 +179,6 @@
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
     </LinearLayout>
 </ScrollView>

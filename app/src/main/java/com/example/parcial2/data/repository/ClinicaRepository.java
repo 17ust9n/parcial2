@@ -68,6 +68,11 @@ public class ClinicaRepository {
         });
     }
 
+    public void eliminarTodosMedicos() {
+        new Thread(() -> medicoDao.eliminarTodos()).start();
+    }
+
+
     private void guardarMedicoEnFirestore(Medico medico) {
         Map<String, Object> data = new HashMap<>();
         data.put("nombre", medico.getNombre());
@@ -109,6 +114,10 @@ public class ClinicaRepository {
                     .document(String.valueOf(paciente.getId()))
                     .delete();
         });
+    }
+
+    public void eliminarTodosPacientes() {
+        new Thread(() -> pacienteDao.eliminarTodos()).start();
     }
 
     private void guardarPacienteEnFirestore(Paciente paciente) {

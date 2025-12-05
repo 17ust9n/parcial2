@@ -49,80 +49,109 @@ public class ListaMedicosActivity extends AppCompatActivity {
         btnEliminar = findViewById(R.id.btnEliminarMedico);
         btnVolver = findViewById(R.id.btnVolverMedicos);
 
-        // Cargar médicos y observar cambios
+        // Observer de Room (LA VERDAD de la BD)
         repo.obtenerMedicos().observe(this, lista -> {
-            if (lista == null || lista.isEmpty()) {
-                agregarMedicosPrueba();
-            } else {
-                medicos = lista;
-                index = 0;
-                mostrarMedico(index);
+            medicos = lista != null ? lista : new ArrayList<>();
+
+            if (medicos.isEmpty()) {
+                mostrarMedicoVacio();
+                agregarMedicosPrueba(); // Room los insertará y el observer se disparará de nuevo
+                return;
             }
+
+            // Ajustar índice por seguridad
+            if (index >= medicos.size()) index = medicos.size() - 1;
+            if (index < 0) index = 0;
+
+            mostrarMedico(index);
         });
 
-        // Navegación
-        btnAnterior.setOnClickListener(v -> {
-            if (!medicos.isEmpty() && index > 0) {
-                index--;
-                mostrarMedico(index);
-            }
-        });
+        // Flechas
+        btnAnterior.setOnClickListener(v -> mostrarMedico(index - 1));
+        btnSiguiente.setOnClickListener(v -> mostrarMedico(index + 1));
 
-        btnSiguiente.setOnClickListener(v -> {
-            if (!medicos.isEmpty() && index < medicos.size() - 1) {
-                index++;
-                mostrarMedico(index);
-            }
-        });
-
-        // Botón volver
-        btnVolver.setOnClickListener(v -> finish());
-
-        // Botones CRUD
+        // CRUD
         btnAgregar.setOnClickListener(v -> mostrarDialogoMedico(true));
         btnModificar.setOnClickListener(v -> {
             if (!medicos.isEmpty()) mostrarDialogoMedico(false);
         });
+
         btnEliminar.setOnClickListener(v -> {
             if (medicos.isEmpty()) return;
 
-            Medico actual = medicos.get(index);
-            repo.eliminarMedico(actual);
-            medicos.remove(index);
-
-            if (index >= medicos.size()) index = medicos.size() - 1;
-            mostrarMedico(index);
+            Medico m = medicos.get(index);
+            repo.eliminarMedico(m);
 
             Snackbar.make(findViewById(android.R.id.content),
                     "Médico eliminado correctamente",
                     Snackbar.LENGTH_SHORT).show();
         });
+
+        btnVolver.setOnClickListener(v -> finish());
     }
 
     private void mostrarMedico(int i) {
         if (medicos.isEmpty()) {
-            tvNombre.setText("No hay médicos");
-            tvMatricula.setText("");
-            tvEspecialidad.setText("");
-            tvEmail.setText("");
+            mostrarMedicoVacio();
             return;
         }
 
-        Medico m = medicos.get(i);
-        tvNombre.setText(m.getNombre());
+        if (i < 0) i = 0;
+        if (i >= medicos.size()) i = medicos.size() - 1;
+        index = i;
+
+        Medico m = medicos.get(index);
+
+        tvNombre.setText("Nombre: " + m.getNombre());
         tvMatricula.setText("Matrícula: " + m.getMatricula());
         tvEspecialidad.setText("Especialidad: " + m.getEspecialidad());
         tvEmail.setText("Email: " + m.getEmail());
+
+        // ==========================
+        //      FLECHA IZQUIERDA
+        // ==========================
+        if (index > 0) {
+            btnAnterior.setEnabled(true);
+            btnAnterior.setColorFilter(getResources().getColor(R.color.rojo, null));
+        } else {
+            btnAnterior.setEnabled(false);
+            btnAnterior.setColorFilter(getResources().getColor(R.color.gris, null));
+        }
+
+        // ==========================
+        //      FLECHA DERECHA
+        // ==========================
+        if (index < medicos.size() - 1) {
+            btnSiguiente.setEnabled(true);
+            btnSiguiente.setColorFilter(getResources().getColor(R.color.rojo, null));
+        } else {
+            btnSiguiente.setEnabled(false);
+            btnSiguiente.setColorFilter(getResources().getColor(R.color.gris, null));
+        }
+
+        btnModificar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+    }
+
+    private void mostrarMedicoVacio() {
+        tvNombre.setText("No hay médicos");
+        tvMatricula.setText("");
+        tvEspecialidad.setText("");
+        tvEmail.setText("");
+
+        btnAnterior.setEnabled(false);
+        btnAnterior.setColorFilter(getResources().getColor(R.color.gris, null));
+
+        btnSiguiente.setEnabled(false);
+        btnSiguiente.setColorFilter(getResources().getColor(R.color.gris, null));
+
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
     }
 
     private void agregarMedicosPrueba() {
-        List<Medico> prueba = new ArrayList<>();
-        prueba.add(new Medico("Dr. Juan Pérez", "MAT123", "Cardiología", "juan@correo.com"));
-        prueba.add(new Medico("Dra. Ana Gómez", "MAT456", "Pediatría", "ana@correo.com"));
-
-        for (Medico m : prueba) {
-            repo.insertarMedico(m);
-        }
+        repo.insertarMedico(new Medico("Dra. Ana Gómez", "MAT456", "Pediatría", "ana@correo.com"));
+        repo.insertarMedico(new Medico("Dr. Juan Pérez", "MAT123", "Cardiología", "juan@correo.com"));
     }
 
     private void mostrarDialogoMedico(boolean modoAgregar) {
@@ -154,18 +183,15 @@ public class ListaMedicosActivity extends AppCompatActivity {
             String email = etEmail.getText().toString().trim();
 
             if (nombre.isEmpty() || matricula.isEmpty() || especialidad.isEmpty() || email.isEmpty()) {
-                if (nombre.isEmpty()) etNombre.setError("Por favor, complete todos los campos");
-                if (matricula.isEmpty()) etMatricula.setError("Por favor, complete todos los campos");
-                if (especialidad.isEmpty()) etEspecialidad.setError("Por favor, complete todos los campos");
-                if (email.isEmpty()) etEmail.setError("Por favor, complete todos los campos");
+                if (nombre.isEmpty()) etNombre.setError("Completa este campo");
+                if (matricula.isEmpty()) etMatricula.setError("Completa este campo");
+                if (especialidad.isEmpty()) etEspecialidad.setError("Completa este campo");
+                if (email.isEmpty()) etEmail.setError("Completa este campo");
                 return;
             }
 
             if (modoAgregar) {
-                Medico nuevo = new Medico(nombre, matricula, especialidad, email);
-                repo.insertarMedico(nuevo);
-                medicos.add(nuevo);
-                index = medicos.size() - 1;
+                repo.insertarMedico(new Medico(nombre, matricula, especialidad, email));
             } else {
                 Medico actual = medicos.get(index);
                 actual.setNombre(nombre);
@@ -175,16 +201,14 @@ public class ListaMedicosActivity extends AppCompatActivity {
                 repo.actualizarMedico(actual);
             }
 
-            mostrarMedico(index);
             dialog.dismiss();
 
             Snackbar.make(findViewById(android.R.id.content),
-                    modoAgregar ? "Médico añadido correctamente" : "Médico modificado correctamente",
+                    modoAgregar ? "Médico añadido" : "Médico modificado",
                     Snackbar.LENGTH_SHORT).show();
         });
 
         btnSalir.setOnClickListener(v -> dialog.dismiss());
-
         dialog.show();
     }
 }

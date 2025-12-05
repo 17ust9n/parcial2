@@ -14,23 +14,16 @@ import com.example.parcial2.ui.login.LoginActivity;
 import com.example.parcial2.ui.paciente.ListaPacientesActivity;
 import com.example.parcial2.ui.medico.ListaMedicosActivity;
 import com.example.parcial2.ui.medicamento.ListaMedicamentosActivity;
-import com.example.parcial2.data.repository.ClinicaRepository;
-import com.example.parcial2.model.Paciente;
-import com.example.parcial2.model.Medico;
-import com.example.parcial2.model.Medicamento;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button btnMedicos, btnPacientes, btnAcerca, btnLogout, btnMedicamentos;
-    private ClinicaRepository repo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        repo = new ClinicaRepository(getApplication());
 
         // Ajuste para barras de sistema
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -42,12 +35,9 @@ public class MainActivity extends AppCompatActivity {
         // Vincular botones
         btnMedicos = findViewById(R.id.btnMedicos);
         btnPacientes = findViewById(R.id.btnPacientes);
+        btnMedicamentos = findViewById(R.id.btnMedicamentos);
         btnAcerca = findViewById(R.id.btnAcerca);
         btnLogout = findViewById(R.id.btnLogout);
-        btnMedicamentos = findViewById(R.id.btnMedicamentos);
-
-        // Inicializar datos de prueba de forma segura
-        inicializarDatosDePrueba();
 
         // ======= ACCIONES DE LOS BOTONES =======
         btnMedicos.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ListaMedicosActivity.class)));
@@ -61,24 +51,5 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-    }
-
-    private void inicializarDatosDePrueba() {
-        // Ejecutamos en un hilo aparte para no bloquear la UI
-        new Thread(() -> {
-            // Insertamos médicos de prueba con email
-            repo.insertarMedico(new Medico("Dr. López", "12345", "Cardiología", "lopez@clinica.com"));
-            repo.insertarMedico(new Medico("Dra. Martínez", "67890", "Pediatría", "martinez@clinica.com"));
-
-            // Insertamos pacientes de prueba
-            repo.insertarPaciente(new Paciente("Juan Pérez", 30, "juan@mail.com", "Sin diagnóstico"));
-            repo.insertarPaciente(new Paciente("Ana Gómez", 25, "ana@mail.com", "Sin diagnóstico"));
-
-            // Insertamos medicamentos de prueba
-            repo.insertarMedicamento(new Medicamento(
-                    "Paracetamol", "Dolor y fiebre", "Bayer", "500mg", "Ninguno", "200", "12/2025"));
-            repo.insertarMedicamento(new Medicamento(
-                    "Ibuprofeno", "Inflamación", "Pfizer", "400mg", "Náuseas", "300", "06/2026"));
-        }).start();
     }
 }

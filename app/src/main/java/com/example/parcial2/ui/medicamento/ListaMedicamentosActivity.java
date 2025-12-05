@@ -65,19 +65,8 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
         });
 
         // Navegación
-        btnAnterior.setOnClickListener(v -> {
-            if (!medicamentos.isEmpty() && index > 0) {
-                index--;
-                mostrarMedicamento(index);
-            }
-        });
-
-        btnSiguiente.setOnClickListener(v -> {
-            if (!medicamentos.isEmpty() && index < medicamentos.size() - 1) {
-                index++;
-                mostrarMedicamento(index);
-            }
-        });
+        btnAnterior.setOnClickListener(v -> mostrarMedicamento(index - 1));
+        btnSiguiente.setOnClickListener(v -> mostrarMedicamento(index + 1));
 
         // Botón volver
         btnVolver.setOnClickListener(v -> finish());
@@ -112,10 +101,21 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
             tvEfectos.setText("");
             tvPrecio.setText("");
             tvVencimiento.setText("");
+
+            btnAnterior.setEnabled(false);
+            btnSiguiente.setEnabled(false);
+            btnAnterior.setColorFilter(getResources().getColor(R.color.gris, null));
+            btnSiguiente.setColorFilter(getResources().getColor(R.color.gris, null));
+            btnModificar.setEnabled(false);
+            btnEliminar.setEnabled(false);
             return;
         }
 
-        Medicamento m = medicamentos.get(i);
+        if (i < 0) i = 0;
+        if (i >= medicamentos.size()) i = medicamentos.size() - 1;
+        index = i;
+
+        Medicamento m = medicamentos.get(index);
         tvNombre.setText(m.getNombre());
         tvUso.setText("Uso: " + m.getUso());
         tvLaboratorio.setText("Laboratorio: " + m.getLaboratorio());
@@ -123,27 +123,40 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
         tvEfectos.setText("Efectos: " + m.getEfectos());
         tvPrecio.setText("Precio: " + m.getPrecio());
         tvVencimiento.setText("Vencimiento: " + m.getVencimiento());
+
+        // Botón Anterior
+        if (index > 0) {
+            btnAnterior.setEnabled(true);
+            btnAnterior.setColorFilter(getResources().getColor(R.color.rojo, null));
+        } else {
+            btnAnterior.setEnabled(false);
+            btnAnterior.setColorFilter(getResources().getColor(R.color.gris, null));
+        }
+
+        // Botón Siguiente
+        if (index < medicamentos.size() - 1) {
+            btnSiguiente.setEnabled(true);
+            btnSiguiente.setColorFilter(getResources().getColor(R.color.rojo, null));
+        } else {
+            btnSiguiente.setEnabled(false);
+            btnSiguiente.setColorFilter(getResources().getColor(R.color.gris, null));
+        }
+
+        btnModificar.setEnabled(true);
+        btnEliminar.setEnabled(true);
     }
 
     private void agregarMedicamentosPrueba() {
         List<Medicamento> prueba = new ArrayList<>();
         prueba.add(new Medicamento(
-                "Paracetamol",
-                "Alivia el dolor y baja la fiebre",
-                "Bayer",
-                "Tablestas de 500mg",
-                "Náuseas, mareos",
-                "$50",
-                "2025-12-31"
+                "Paracetamol", "Alivia el dolor y baja la fiebre",
+                "Bayer", "Tabletas de 500mg", "Náuseas, mareos",
+                "$50", "2025-12-31"
         ));
         prueba.add(new Medicamento(
-                "Ibuprofeno",
-                "Analgésico y antinflamatorio",
-                "Pfizer",
-                "400mg en cápsula",
-                "Dolor de estómago",
-                "$70",
-                "2025-11-30"
+                "Ibuprofeno", "Analgésico y antiinflamatorio",
+                "Pfizer", "400mg en cápsula", "Dolor de estómago",
+                "$70", "2025-11-30"
         ));
 
         for (Medicamento m : prueba) {
@@ -172,6 +185,7 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
             Medicamento actual = medicamentos.get(index);
             etNombre.setText(actual.getNombre());
             etUso.setText(actual.getUso());
+            etLaboratorio.setText(actual.getLaboratorio());
             etDosis.setText(actual.getDosis());
             etEfectos.setText(actual.getEfectos());
             etPrecio.setText(actual.getPrecio());
@@ -187,7 +201,8 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
             String precio = etPrecio.getText().toString().trim();
             String vencimiento = etVencimiento.getText().toString().trim();
 
-            if (nombre.isEmpty() || uso.isEmpty() || laboratorio.isEmpty() || dosis.isEmpty() || efectos.isEmpty() || precio.isEmpty() || vencimiento.isEmpty()) {
+            if (nombre.isEmpty() || uso.isEmpty() || laboratorio.isEmpty() || dosis.isEmpty() ||
+                    efectos.isEmpty() || precio.isEmpty() || vencimiento.isEmpty()) {
                 if (nombre.isEmpty()) etNombre.setError("Campo obligatorio");
                 if (uso.isEmpty()) etUso.setError("Campo obligatorio");
                 if (laboratorio.isEmpty()) etLaboratorio.setError("Campo obligatorio");

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:padding="16dp"
-    android:background="@color/rojo">
+    android:background="@color/azul">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,6 @@
         android:paddingTop="16dp"
         android:paddingBottom="16dp">
 
-        <!-- CARD DEL PACIENTE CON FLECHAS Y INFO -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardPaciente"
             android:layout_width="match_parent"
@@ -33,32 +32,36 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- MENSAJE INICIAL -->
+                <!-- Título -->
                 <TextView
-                    android:id="@+id/tvTituloPaciente"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvInfoPacientes"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Información de cada paciente:"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/black"
-                    android:layout_marginBottom="12dp"/>
+                    android:gravity="center"
+                    android:paddingBottom="16dp"/>
 
-                <!-- INFO DEL PACIENTE + FLECHAS -->
+                <!-- Info + Flechas -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
 
+                    <!-- Flecha Anterior -->
                     <ImageButton
                         android:id="@+id/btnAnteriorPaciente"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/ic_arrow_left"
-                        android:contentDescription="Anterior"/>
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_media_previous_azul"
+                        android:contentDescription="Anterior"
+                        android:scaleType="fitCenter"/>
 
+                    <!-- Info paciente -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -70,52 +73,49 @@
                             android:id="@+id/tvNombrePaciente"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Nombre del paciente"
-                            android:textSize="16sp"
-                            android:textColor="@android:color/black"/>
+                            android:text="Nombre"
+                            android:textSize="20sp"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:id="@+id/tvEdadPaciente"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Edad: 0"
-                            android:textSize="16sp"
-                            android:textColor="@android:color/darker_gray"/>
+                            android:textSize="16sp"/>
 
                         <TextView
                             android:id="@+id/tvEmailPaciente"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Email"
-                            android:textSize="16sp"
-                            android:textColor="@android:color/darker_gray"/>
+                            android:textSize="16sp"/>
 
                         <TextView
                             android:id="@+id/tvDiagnosticoPaciente"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Diagnóstico"
-                            android:textSize="16sp"
-                            android:textColor="@android:color/darker_gray"/>
+                            android:textSize="16sp"/>
                     </LinearLayout>
 
+                    <!-- Flecha Siguiente -->
                     <ImageButton
                         android:id="@+id/btnSiguientePaciente"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/ic_arrow_right"
-                        android:contentDescription="Siguiente"/>
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_media_next_azul"
+                        android:contentDescription="Siguiente"
+                        android:scaleType="fitCenter"/>
                 </LinearLayout>
 
-                <!-- BOTONES DE ACCIÓN VERTICALES CON ICONOS -->
+                <!-- BOTONES ACCIÓN -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:gravity="center"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="16dp">
+                    android:paddingTop="16dp">
 
                     <!-- Agregar -->
                     <com.google.android.material.button.MaterialButton
@@ -182,3 +182,4 @@
 
     </LinearLayout>
 </ScrollView>
+

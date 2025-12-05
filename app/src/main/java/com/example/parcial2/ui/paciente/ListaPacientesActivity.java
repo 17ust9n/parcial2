@@ -49,79 +49,110 @@ public class ListaPacientesActivity extends AppCompatActivity {
         btnEliminar = findViewById(R.id.btnEliminarPaciente);
         btnVolver = findViewById(R.id.btnVolverPacientes);
 
-        // Cargar pacientes desde repositorio o agregar de prueba
+        // Limpiar BD y agregar pacientes de prueba
+        repo.eliminarTodosPacientes();
+        agregarPacientesPrueba();
+
+        // Observar BD
         repo.obtenerPacientes().observe(this, lista -> {
-            if (lista == null || lista.isEmpty()) {
-                agregarPacientesPrueba();
-            } else {
-                pacientes = lista;
-                mostrarPaciente(index);
+            pacientes = lista;
+
+            if (pacientes == null || pacientes.isEmpty()) {
+                mostrarPacienteVacio();
+                return;
             }
+
+            if (index >= pacientes.size()) index = pacientes.size() - 1;
+            if (index < 0) index = 0;
+
+            mostrarPaciente(index);
         });
 
         // Navegación
         btnAnterior.setOnClickListener(v -> {
-            if (index > 0) index--;
-            mostrarPaciente(index);
+            if (index > 0) {
+                index--;
+                mostrarPaciente(index);
+            }
         });
 
         btnSiguiente.setOnClickListener(v -> {
-            if (index < pacientes.size() - 1) index++;
-            mostrarPaciente(index);
+            if (index < pacientes.size() - 1) {
+                index++;
+                mostrarPaciente(index);
+            }
         });
 
         btnVolver.setOnClickListener(v -> finish());
 
-        // Agregar
         btnAgregar.setOnClickListener(v -> mostrarDialogoPaciente(true));
-
-        // Modificar
         btnModificar.setOnClickListener(v -> {
             if (!pacientes.isEmpty()) mostrarDialogoPaciente(false);
         });
 
-        // Eliminar
         btnEliminar.setOnClickListener(v -> {
             if (pacientes.isEmpty()) return;
 
             Paciente actual = pacientes.get(index);
             repo.eliminarPaciente(actual);
-            pacientes.remove(index);
-
-            if (index > 0) index--;
-            mostrarPaciente(index);
 
             Snackbar.make(findViewById(android.R.id.content),
-                    "Usuario eliminado correctamente",
+                    "Paciente eliminado correctamente",
                     Snackbar.LENGTH_SHORT).show();
         });
     }
 
     private void mostrarPaciente(int i) {
         if (pacientes.isEmpty()) {
-            tvNombre.setText("No hay pacientes");
-            tvEdad.setText("");
-            tvEmail.setText("");
-            tvDiagnostico.setText("");
+            mostrarPacienteVacio();
             return;
         }
 
         Paciente p = pacientes.get(i);
+
         tvNombre.setText("Nombre: " + p.getNombre());
         tvEdad.setText("Edad: " + p.getEdad());
         tvEmail.setText("Email: " + p.getEmail());
         tvDiagnostico.setText("Diagnóstico: " + p.getDiagnostico());
+
+        // Flecha anterior
+        if (i > 0) {
+            btnAnterior.setEnabled(true);
+            btnAnterior.setColorFilter(getResources().getColor(R.color.rojo, null));
+        } else {
+            btnAnterior.setEnabled(false);
+            btnAnterior.setColorFilter(getResources().getColor(R.color.gris, null));
+        }
+
+        // Flecha siguiente
+        if (i < pacientes.size() - 1) {
+            btnSiguiente.setEnabled(true);
+            btnSiguiente.setColorFilter(getResources().getColor(R.color.rojo, null));
+        } else {
+            btnSiguiente.setEnabled(false);
+            btnSiguiente.setColorFilter(getResources().getColor(R.color.gris, null));
+        }
+
+        // Botones modificar y eliminar
+        btnModificar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+    }
+
+    private void mostrarPacienteVacio() {
+        tvNombre.setText("No hay pacientes");
+        tvEdad.setText("");
+        tvEmail.setText("");
+        tvDiagnostico.setText("");
+
+        btnAnterior.setEnabled(false);
+        btnSiguiente.setEnabled(false);
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
     }
 
     private void agregarPacientesPrueba() {
-        List<Paciente> prueba = new ArrayList<>();
-        prueba.add(new Paciente("Juan Pérez", 30, "juan@correo.com", "Gripe"));
-        prueba.add(new Paciente("Ana Gómez", 25, "ana@correo.com", "Resfriado"));
-        prueba.add(new Paciente("Luis Martínez", 40, "luis@correo.com", "Dolor de cabeza"));
-
-        for (Paciente p : prueba) {
-            repo.insertarPaciente(p);
-        }
+        repo.insertarPaciente(new Paciente("Luis Martínez", 40, "luis@correo.com", "Dolor de cabeza"));
+        repo.insertarPaciente(new Paciente("María López", 32, "maria@correo.com", "Alergia"));
     }
 
     private void mostrarDialogoPaciente(boolean modoAgregar) {
@@ -138,7 +169,6 @@ public class ListaPacientesActivity extends AppCompatActivity {
         Button btnGuardar = view.findViewById(R.id.btnGuardarPaciente);
         Button btnSalir = view.findViewById(R.id.btnSalirPaciente);
 
-        // Si es modificar, cargar datos actuales
         Paciente paciente = null;
         if (!modoAgregar) {
             paciente = pacientes.get(index);
@@ -156,59 +186,32 @@ public class ListaPacientesActivity extends AppCompatActivity {
             String email = etEmail.getText().toString().trim();
             String diagnostico = etDiagnostico.getText().toString().trim();
 
-            boolean hayError = false;
-
-            if (nombre.isEmpty()) {
-                etNombre.setError("Por favor, complete este campo");
-                hayError = true;
-            }
-
-            if (edadStr.isEmpty()) {
-                etEdad.setError("Por favor, complete este campo");
-                hayError = true;
-            }
-
-            if (email.isEmpty()) {
-                etEmail.setError("Por favor, complete este campo");
-                hayError = true;
-            }
-
-            if (diagnostico.isEmpty()) {
-                etDiagnostico.setError("Por favor, complete este campo");
-                hayError = true;
-            }
-
-            if (hayError) {
-                return; // No guardamos mientras haya campos vacíos
-            }
+            boolean error = false;
+            if (nombre.isEmpty()) { etNombre.setError("Complete este campo"); error = true; }
+            if (edadStr.isEmpty()) { etEdad.setError("Complete este campo"); error = true; }
+            if (email.isEmpty()) { etEmail.setError("Complete este campo"); error = true; }
+            if (diagnostico.isEmpty()) { etDiagnostico.setError("Complete este campo"); error = true; }
+            if (error) return;
 
             int edad = Integer.parseInt(edadStr);
 
             if (modoAgregar) {
-                Paciente nuevo = new Paciente(nombre, edad, email, diagnostico);
-                repo.insertarPaciente(nuevo);
-                pacientes.add(nuevo);
-                index = pacientes.size() - 1;
+                repo.insertarPaciente(new Paciente(nombre, edad, email, diagnostico));
             } else {
-                Paciente actual = pacientes.get(index);
-                actual.setNombre(nombre);
-                actual.setEdad(edad);
-                actual.setEmail(email);
-                actual.setDiagnostico(diagnostico);
-                repo.actualizarPaciente(actual);
+                finalPaciente.setNombre(nombre);
+                finalPaciente.setEdad(edad);
+                finalPaciente.setEmail(email);
+                finalPaciente.setDiagnostico(diagnostico);
+                repo.actualizarPaciente(finalPaciente);
             }
 
-            mostrarPaciente(index);
             dialog.dismiss();
-
             Snackbar.make(findViewById(android.R.id.content),
-                    modoAgregar ? "Usuario añadido correctamente" : "Usuario modificado correctamente",
+                    modoAgregar ? "Paciente añadido correctamente" : "Paciente modificado correctamente",
                     Snackbar.LENGTH_SHORT).show();
         });
 
-
         btnSalir.setOnClickListener(v -> dialog.dismiss());
-
         dialog.show();
     }
 }

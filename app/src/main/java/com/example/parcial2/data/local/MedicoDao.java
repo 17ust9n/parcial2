@@ -24,8 +24,12 @@ public interface MedicoDao {
     void eliminar(Medico medico);
 
     @Query("SELECT * FROM Medico ORDER BY nombre ASC")
-    LiveData<List<Medico>> allMedicos();  // <-- CORREGIDO
+    LiveData<List<Medico>> allMedicos();
 
     @Query("SELECT * FROM Medico WHERE id = :id LIMIT 1")
     Medico obtenerPorId(int id);
+
+    // NUEVO: eliminar todos los médicos
+    @Query("DELETE FROM Medico")
+    void eliminarTodos();
 }
