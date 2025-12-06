@@ -87,6 +87,20 @@
                     app:iconTint="@null"
                     android:layout_marginBottom="12dp"/>
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRegisterGoogle"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:text="Registrarse con Google"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@android:color/holo_blue_light"
+                    app:icon="@drawable/ic_google"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:iconSize="32dp"
+                    app:iconTint="@null"
+                    android:layout_marginBottom="12dp"/>
+
                 <!-- Botón Volver a Login -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnVolverLogin"

@@ -56,6 +56,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
 
 
+    // ⭐ Google Sign-In (NECESARIO)
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
+
     // Tests locales (unit tests)
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:4.11.0'
