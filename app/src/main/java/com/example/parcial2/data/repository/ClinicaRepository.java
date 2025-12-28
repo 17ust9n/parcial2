@@ -1,6 +1,8 @@
 package com.example.parcial2.data.repository;
 
 import android.app.Application;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -9,9 +11,11 @@ import com.example.parcial2.data.local.AppDatabase;
 import com.example.parcial2.data.local.MedicoDao;
 import com.example.parcial2.data.local.PacienteDao;
 import com.example.parcial2.data.local.MedicamentoDao;
+import com.example.parcial2.data.local.TurnoDao;
 import com.example.parcial2.model.Medico;
 import com.example.parcial2.model.Paciente;
 import com.example.parcial2.model.Medicamento;
+import com.example.parcial2.model.Turno;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -25,15 +29,22 @@ public class ClinicaRepository {
     private final MedicoDao medicoDao;
     private final PacienteDao pacienteDao;
     private final MedicamentoDao medicamentoDao;
+    private final TurnoDao turnoDao;
     private final FirebaseFirestore firestore;
 
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
+
+    // Interface para callback de turnos
+    public interface OnTurnoInsertadoListener {
+        void onTurnoInsertado(boolean exitoso);
+    }
 
     public ClinicaRepository(Application application) {
         AppDatabase db = AppDatabase.getInstance(application);
         medicoDao = db.medicoDao();
         pacienteDao = db.pacienteDao();
         medicamentoDao = db.medicamentoDao();
+        turnoDao = db.turnoDao();
         firestore = FirebaseFirestore.getInstance();
     }
 
@@ -71,7 +82,6 @@ public class ClinicaRepository {
     public void eliminarTodosMedicos() {
         new Thread(() -> medicoDao.eliminarTodos()).start();
     }
-
 
     private void guardarMedicoEnFirestore(Medico medico) {
         Map<String, Object> data = new HashMap<>();
@@ -177,5 +187,74 @@ public class ClinicaRepository {
                 .document(String.valueOf(medicamento.getId()))
                 .set(data)
                 .addOnSuccessListener(a -> Log.d("FIRESTORE", "Medicamento guardado."));
+    }
+
+    // ============================
+    //        TURNOS
+    // ============================
+    public LiveData<List<Turno>> obtenerTurnos() {
+        return turnoDao.obtenerTurnos();
+    }
+
+    // Método con callback
+    public void insertarTurno(Turno turno, OnTurnoInsertadoListener listener) {
+        executor.execute(() -> {
+            try {
+                long id = turnoDao.insertarTurno(turno);
+                turno.setId((int) id);
+                guardarTurnoEnFirestore(turno);
+
+                // Notificar éxito en el hilo principal
+                if (listener != null) {
+                    new Handler(Looper.getMainLooper()).post(() ->
+                            listener.onTurnoInsertado(true)
+                    );
+                }
+            } catch (Exception e) {
+                Log.e("REPO", "Error al insertar turno", e);
+                // Notificar error en el hilo principal
+                if (listener != null) {
+                    new Handler(Looper.getMainLooper()).post(() ->
+                            listener.onTurnoInsertado(false)
+                    );
+                }
+            }
+        });
+    }
+
+    // Mantener el método original para compatibilidad
+    public void insertarTurno(Turno turno) {
+        insertarTurno(turno, null);
+    }
+
+    public void actualizarTurno(Turno turno) {
+        executor.execute(() -> {
+            turnoDao.actualizarTurno(turno);
+            guardarTurnoEnFirestore(turno);
+        });
+    }
+
+    public void eliminarTurno(Turno turno) {
+        executor.execute(() -> {
+            turnoDao.eliminarTurno(turno);
+            firestore.collection("turnos")
+                    .document(String.valueOf(turno.getId()))
+                    .delete();
+        });
+    }
+
+    private void guardarTurnoEnFirestore(Turno turno) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("nombreMedico", turno.getNombreMedico());
+        data.put("nombrePaciente", turno.getNombrePaciente());
+        data.put("nombreMedicamento", turno.getNombreMedicamento());
+        data.put("fecha", turno.getFecha());
+        data.put("hora", turno.getHora());
+        data.put("consultorio", turno.getConsultorio());
+
+        firestore.collection("turnos")
+                .document(String.valueOf(turno.getId()))
+                .set(data)
+                .addOnSuccessListener(a -> Log.d("FIRESTORE", "Turno guardado."));
     }
 }

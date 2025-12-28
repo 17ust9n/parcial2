@@ -53,15 +53,11 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
         btnEliminar = findViewById(R.id.btnEliminarMedicamento);
         btnVolver = findViewById(R.id.btnVolverMedicamentos);
 
-        // Cargar medicamentos y observar cambios
+        // Observar medicamentos existentes en la base de datos
         repo.obtenerMedicamentos().observe(this, lista -> {
-            if (lista == null || lista.isEmpty()) {
-                agregarMedicamentosPrueba();
-            } else {
-                medicamentos = lista;
-                index = 0;
-                mostrarMedicamento(index);
-            }
+            medicamentos = (lista != null) ? lista : new ArrayList<>();
+            index = 0;
+            mostrarMedicamento(index);
         });
 
         // Navegación
@@ -81,10 +77,11 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
 
             Medicamento actual = medicamentos.get(index);
             repo.eliminarMedicamento(actual);
-            medicamentos.remove(index);
 
-            if (index >= medicamentos.size()) index = medicamentos.size() - 1;
-            mostrarMedicamento(index);
+            if (!medicamentos.isEmpty()) {
+                if (index >= medicamentos.size()) index = medicamentos.size() - 1;
+                mostrarMedicamento(index);
+            }
 
             Snackbar.make(findViewById(android.R.id.content),
                     "Medicamento eliminado correctamente",
@@ -124,44 +121,14 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
         tvPrecio.setText("Precio: " + m.getPrecio());
         tvVencimiento.setText("Vencimiento: " + m.getVencimiento());
 
-        // Botón Anterior
-        if (index > 0) {
-            btnAnterior.setEnabled(true);
-            btnAnterior.setColorFilter(getResources().getColor(R.color.rojo, null));
-        } else {
-            btnAnterior.setEnabled(false);
-            btnAnterior.setColorFilter(getResources().getColor(R.color.gris, null));
-        }
+        btnAnterior.setEnabled(index > 0);
+        btnSiguiente.setEnabled(index < medicamentos.size() - 1);
 
-        // Botón Siguiente
-        if (index < medicamentos.size() - 1) {
-            btnSiguiente.setEnabled(true);
-            btnSiguiente.setColorFilter(getResources().getColor(R.color.rojo, null));
-        } else {
-            btnSiguiente.setEnabled(false);
-            btnSiguiente.setColorFilter(getResources().getColor(R.color.gris, null));
-        }
+        btnAnterior.setColorFilter(getResources().getColor(index > 0 ? R.color.rojo : R.color.gris, null));
+        btnSiguiente.setColorFilter(getResources().getColor(index < medicamentos.size() - 1 ? R.color.rojo : R.color.gris, null));
 
         btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
-    }
-
-    private void agregarMedicamentosPrueba() {
-        List<Medicamento> prueba = new ArrayList<>();
-        prueba.add(new Medicamento(
-                "Paracetamol", "Alivia el dolor y baja la fiebre",
-                "Bayer", "Tabletas de 500mg", "Náuseas, mareos",
-                "$50", "2025-12-31"
-        ));
-        prueba.add(new Medicamento(
-                "Ibuprofeno", "Analgésico y antiinflamatorio",
-                "Pfizer", "400mg en cápsula", "Dolor de estómago",
-                "$70", "2025-11-30"
-        ));
-
-        for (Medicamento m : prueba) {
-            repo.insertarMedicamento(m);
-        }
     }
 
     private void mostrarDialogoMedicamento(boolean modoAgregar) {
@@ -217,8 +184,6 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
                 Medicamento nuevo = new Medicamento(nombre, uso,
                         laboratorio, dosis, efectos, precio, vencimiento);
                 repo.insertarMedicamento(nuevo);
-                medicamentos.add(nuevo);
-                index = medicamentos.size() - 1;
             } else {
                 Medicamento actual = medicamentos.get(index);
                 actual.setNombre(nombre);
@@ -231,9 +196,7 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
                 repo.actualizarMedicamento(actual);
             }
 
-            mostrarMedicamento(index);
             dialog.dismiss();
-
             Snackbar.make(findViewById(android.R.id.content),
                     modoAgregar ? "Medicamento añadido correctamente" : "Medicamento modificado correctamente",
                     Snackbar.LENGTH_SHORT).show();

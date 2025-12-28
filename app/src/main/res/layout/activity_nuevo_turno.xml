@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sacar Turno"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/rojo"
+            android:gravity="center"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Selección de Médico -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Médico:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <!-- Flecha Anterior -->
+            <ImageButton
+                android:id="@+id/btnAnteriorMedico"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_previous_red"
+                android:contentDescription="Desplazar izquierda"
+                android:scaleType="fitCenter"/>
+
+            <!-- Nombre del Médico -->
+            <TextView
+                android:id="@+id/tvMedicoSeleccionado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Médico: No seleccionado"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:background="@android:drawable/dialog_holo_light_frame"
+                android:gravity="center"
+                android:layout_marginHorizontal="16dp"/>
+
+            <!-- Flecha Siguiente -->
+            <ImageButton
+                android:id="@+id/btnSiguienteMedico"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_next_red"
+                android:contentDescription="Desplazar derecha"
+                android:scaleType="fitCenter"/>
+        </LinearLayout>
+
+        <!-- Selección de Paciente -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2. Paciente:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <!-- Flecha Anterior -->
+            <ImageButton
+                android:id="@+id/btnAnteriorPaciente"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_previous_azul"
+                android:contentDescription="Desplazar izquierda"
+                android:scaleType="fitCenter"/>
+
+            <!-- Nombre del Paciente -->
+            <TextView
+                android:id="@+id/tvPacienteSeleccionado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Paciente: No seleccionado"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:background="@android:drawable/dialog_holo_light_frame"
+                android:gravity="center"
+                android:layout_marginHorizontal="16dp"/>
+
+            <!-- Flecha Siguiente -->
+            <ImageButton
+                android:id="@+id/btnSiguientePaciente"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_next_violeta"
+                android:contentDescription="Desplazar derecha"
+                android:scaleType="fitCenter"/>
+        </LinearLayout>
+
+        <!-- Selección de Medicamento -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3. Medicamento:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <!-- Flecha Anterior -->
+            <ImageButton
+                android:id="@+id/btnAnteriorMedicamento"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_arrow_left_alt"
+                android:contentDescription="Desplazar izquierda"
+                android:scaleType="fitCenter"/>
+
+            <!-- Nombre del Medicamento -->
+            <TextView
+                android:id="@+id/tvMedicamentoSeleccionado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medicamento: No seleccionado"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:background="@android:drawable/dialog_holo_light_frame"
+                android:gravity="center"
+                android:layout_marginHorizontal="16dp"/>
+
+            <!-- Flecha Siguiente -->
+            <ImageButton
+                android:id="@+id/btnSiguienteMedicamento"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_arrow_right_alt"
+                android:contentDescription="Desplazar derecha"
+                android:scaleType="fitCenter"/>
+        </LinearLayout>
+
+
+        <!-- Selección de Fecha -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="4. Fecha"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/etFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingrese fecha (dd/mm/aaaa)"
+            android:inputType="text"
+            android:padding="12dp"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Selección de Hora -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="5. Hora"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/etHora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingrese hora (hh:mm)"
+            android:inputType="text"
+            android:padding="12dp"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Consultorio -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="6. Consultorio"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/etConsultorio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingrese consultorio"
+            android:inputType="text"
+            android:padding="12dp"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginBottom="32dp"/>
+
+        <!-- Botones de acción -->
+        <Button
+            android:id="@+id/btnGuardarTurno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar Turno"
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp"/>
+
+        <Button
+            android:id="@+id/btnCancelarTurno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:backgroundTint="@color/gris"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+</ScrollView>

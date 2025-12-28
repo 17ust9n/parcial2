@@ -87,6 +87,21 @@
                     app:iconTint="@null"
                     android:layout_marginBottom="12dp"/>
 
+                <!-- BOTÓN MEDICAMENTOS -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnTurnos"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:text="Turnos"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@android:color/holo_orange_light"
+                    app:icon="@drawable/ic_turno"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:iconSize="32dp"
+                    app:iconTint="@null"
+                    android:layout_marginBottom="12dp"/>
+
                 <!-- BOTÓN ACERCA -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAcerca"

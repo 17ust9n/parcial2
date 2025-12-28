@@ -57,7 +57,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:src="@drawable/ic_media_previous_violeta"
+                        android:src="@drawable/ic_previous_violeta"
                         android:contentDescription="Anterior"
                         android:scaleType="fitCenter"/>
 
@@ -132,7 +132,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:src="@drawable/ic_media_next_violeta"
+                        android:src="@drawable/ic_next_violeta"
                         android:contentDescription="Siguiente"
                         android:scaleType="fitCenter"/>
                 </LinearLayout>

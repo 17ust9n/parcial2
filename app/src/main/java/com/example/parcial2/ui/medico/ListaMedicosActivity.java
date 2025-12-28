@@ -49,48 +49,42 @@ public class ListaMedicosActivity extends AppCompatActivity {
         btnEliminar = findViewById(R.id.btnEliminarMedico);
         btnVolver = findViewById(R.id.btnVolverMedicos);
 
-        // Observer de Room (LA VERDAD de la BD)
+        // Observar médicos desde la BD
         repo.obtenerMedicos().observe(this, lista -> {
-            medicos = lista != null ? lista : new ArrayList<>();
-
-            if (medicos.isEmpty()) {
-                mostrarMedicoVacio();
-                agregarMedicosPrueba(); // Room los insertará y el observer se disparará de nuevo
-                return;
-            }
-
-            // Ajustar índice por seguridad
-            if (index >= medicos.size()) index = medicos.size() - 1;
-            if (index < 0) index = 0;
-
-            mostrarMedico(index);
+            medicos = (lista != null) ? lista : new ArrayList<>();
+            index = 0;
+            mostrarMedicoIndex(index);
         });
 
-        // Flechas
-        btnAnterior.setOnClickListener(v -> mostrarMedico(index - 1));
-        btnSiguiente.setOnClickListener(v -> mostrarMedico(index + 1));
+        // Navegación
+        btnAnterior.setOnClickListener(v -> mostrarMedicoIndex(index - 1));
+        btnSiguiente.setOnClickListener(v -> mostrarMedicoIndex(index + 1));
 
         // CRUD
         btnAgregar.setOnClickListener(v -> mostrarDialogoMedico(true));
         btnModificar.setOnClickListener(v -> {
             if (!medicos.isEmpty()) mostrarDialogoMedico(false);
         });
-
         btnEliminar.setOnClickListener(v -> {
             if (medicos.isEmpty()) return;
 
-            Medico m = medicos.get(index);
-            repo.eliminarMedico(m);
-
+            repo.eliminarMedico(medicos.get(index));
             Snackbar.make(findViewById(android.R.id.content),
                     "Médico eliminado correctamente",
                     Snackbar.LENGTH_SHORT).show();
+
+            if (!medicos.isEmpty()) {
+                if (index >= medicos.size()) index = medicos.size() - 1;
+                mostrarMedicoIndex(index);
+            } else {
+                mostrarMedicoVacio();
+            }
         });
 
         btnVolver.setOnClickListener(v -> finish());
     }
 
-    private void mostrarMedico(int i) {
+    private void mostrarMedicoIndex(int i) {
         if (medicos.isEmpty()) {
             mostrarMedicoVacio();
             return;
@@ -101,33 +95,16 @@ public class ListaMedicosActivity extends AppCompatActivity {
         index = i;
 
         Medico m = medicos.get(index);
-
         tvNombre.setText("Nombre: " + m.getNombre());
         tvMatricula.setText("Matrícula: " + m.getMatricula());
         tvEspecialidad.setText("Especialidad: " + m.getEspecialidad());
         tvEmail.setText("Email: " + m.getEmail());
 
-        // ==========================
-        //      FLECHA IZQUIERDA
-        // ==========================
-        if (index > 0) {
-            btnAnterior.setEnabled(true);
-            btnAnterior.setColorFilter(getResources().getColor(R.color.rojo, null));
-        } else {
-            btnAnterior.setEnabled(false);
-            btnAnterior.setColorFilter(getResources().getColor(R.color.gris, null));
-        }
+        btnAnterior.setEnabled(index > 0);
+        btnAnterior.setColorFilter(getColor(index > 0 ? R.color.rojo : R.color.gris));
 
-        // ==========================
-        //      FLECHA DERECHA
-        // ==========================
-        if (index < medicos.size() - 1) {
-            btnSiguiente.setEnabled(true);
-            btnSiguiente.setColorFilter(getResources().getColor(R.color.rojo, null));
-        } else {
-            btnSiguiente.setEnabled(false);
-            btnSiguiente.setColorFilter(getResources().getColor(R.color.gris, null));
-        }
+        btnSiguiente.setEnabled(index < medicos.size() - 1);
+        btnSiguiente.setColorFilter(getColor(index < medicos.size() - 1 ? R.color.rojo : R.color.gris));
 
         btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
@@ -140,18 +117,13 @@ public class ListaMedicosActivity extends AppCompatActivity {
         tvEmail.setText("");
 
         btnAnterior.setEnabled(false);
-        btnAnterior.setColorFilter(getResources().getColor(R.color.gris, null));
+        btnAnterior.setColorFilter(getColor(R.color.gris));
 
         btnSiguiente.setEnabled(false);
-        btnSiguiente.setColorFilter(getResources().getColor(R.color.gris, null));
+        btnSiguiente.setColorFilter(getColor(R.color.gris));
 
         btnModificar.setEnabled(false);
         btnEliminar.setEnabled(false);
-    }
-
-    private void agregarMedicosPrueba() {
-        repo.insertarMedico(new Medico("Dra. Ana Gómez", "MAT456", "Pediatría", "ana@correo.com"));
-        repo.insertarMedico(new Medico("Dr. Juan Pérez", "MAT123", "Cardiología", "juan@correo.com"));
     }
 
     private void mostrarDialogoMedico(boolean modoAgregar) {
@@ -182,13 +154,10 @@ public class ListaMedicosActivity extends AppCompatActivity {
             String especialidad = etEspecialidad.getText().toString().trim();
             String email = etEmail.getText().toString().trim();
 
-            if (nombre.isEmpty() || matricula.isEmpty() || especialidad.isEmpty() || email.isEmpty()) {
-                if (nombre.isEmpty()) etNombre.setError("Completa este campo");
-                if (matricula.isEmpty()) etMatricula.setError("Completa este campo");
-                if (especialidad.isEmpty()) etEspecialidad.setError("Completa este campo");
-                if (email.isEmpty()) etEmail.setError("Completa este campo");
-                return;
-            }
+            if (nombre.isEmpty()) { etNombre.setError("Completa este campo"); return; }
+            if (matricula.isEmpty()) { etMatricula.setError("Completa este campo"); return; }
+            if (especialidad.isEmpty()) { etEspecialidad.setError("Completa este campo"); return; }
+            if (email.isEmpty()) { etEmail.setError("Completa este campo"); return; }
 
             if (modoAgregar) {
                 repo.insertarMedico(new Medico(nombre, matricula, especialidad, email));
@@ -202,7 +171,6 @@ public class ListaMedicosActivity extends AppCompatActivity {
             }
 
             dialog.dismiss();
-
             Snackbar.make(findViewById(android.R.id.content),
                     modoAgregar ? "Médico añadido" : "Médico modificado",
                     Snackbar.LENGTH_SHORT).show();

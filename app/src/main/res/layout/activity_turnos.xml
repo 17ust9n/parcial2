@@ -2,12 +2,12 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/pacientes_scroll"
+    android:id="@+id/turnos_scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:padding="16dp"
-    android:background="@color/azul">
+    android:background="@color/naranja">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
         android:paddingBottom="16dp">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardPaciente"
+            android:id="@+id/cardTurno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -32,36 +32,31 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- Título -->
                 <TextView
-                    android:id="@+id/tvInfoPacientes"
+                    android:id="@+id/tvTituloTurnos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Información de cada paciente:"
+                    android:text="Gestión de Turnos"
                     android:textSize="22sp"
                     android:textStyle="bold"
-                    android:textColor="@android:color/black"
                     android:gravity="center"
                     android:paddingBottom="16dp"/>
 
-                <!-- Contenedor flechas + info -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
 
-                    <!-- Flecha Anterior -->
                     <ImageButton
-                        android:id="@+id/btnAnteriorPaciente"
+                        android:id="@+id/btnAnteriorTurno"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:src="@drawable/ic_previous_azul"
+                        android:src="@drawable/ic_previous_red"
                         android:contentDescription="Anterior"
                         android:scaleType="fitCenter"/>
 
-                    <!-- Info paciente -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -70,42 +65,36 @@
                         android:paddingHorizontal="16dp">
 
                         <TextView
-                            android:id="@+id/tvNombrePaciente"
+                            android:id="@+id/tvInfoMedico"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Nombre"
-                            android:textSize="20sp"
-                            android:textStyle="bold"/>
+                            android:text="Médico:"/>
 
                         <TextView
-                            android:id="@+id/tvEdadPaciente"
+                            android:id="@+id/tvInfoPaciente"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Edad: 0"
-                            android:textSize="16sp"/>
+                            android:text="Paciente:"/>
 
                         <TextView
-                            android:id="@+id/tvEmailPaciente"
+                            android:id="@+id/tvInfoMedicamento"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Email"
-                            android:textSize="16sp"/>
+                            android:text="Medicamento:"/>
 
                         <TextView
-                            android:id="@+id/tvDiagnosticoPaciente"
+                            android:id="@+id/tvFechaHora"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Diagnóstico"
-                            android:textSize="16sp"/>
+                            android:text="Fecha y Hora:"/>
                     </LinearLayout>
 
-                    <!-- Flecha Siguiente -->
                     <ImageButton
-                        android:id="@+id/btnSiguientePaciente"
+                        android:id="@+id/btnSiguienteTurno"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:src="@drawable/ic_next_azul"
+                        android:src="@drawable/ic_next_red"
                         android:contentDescription="Siguiente"
                         android:scaleType="fitCenter"/>
                 </LinearLayout>
@@ -119,7 +108,7 @@
 
                     <!-- Agregar -->
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnAgregarPaciente"
+                        android:id="@+id/btnAgregarTurno"
                         android:layout_width="match_parent"
                         android:layout_height="64dp"
                         android:text="Agregar"
@@ -134,7 +123,7 @@
 
                     <!-- Modificar -->
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnModificarPaciente"
+                        android:id="@+id/btnModificarTurno"
                         android:layout_width="match_parent"
                         android:layout_height="64dp"
                         android:text="Modificar"
@@ -149,7 +138,7 @@
 
                     <!-- Eliminar -->
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnEliminarPaciente"
+                        android:id="@+id/btnEliminarTurno"
                         android:layout_width="match_parent"
                         android:layout_height="64dp"
                         android:text="Eliminar"
@@ -164,7 +153,7 @@
 
                     <!-- Volver -->
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnVolverPacientes"
+                        android:id="@+id/btnVolverTurnos"
                         android:layout_width="match_parent"
                         android:layout_height="64dp"
                         android:text="Volver"
@@ -177,10 +166,8 @@
                         app:iconTint="@null"/>
                 </LinearLayout>
 
-
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 </ScrollView>
-
